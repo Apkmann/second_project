@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+</head>
+<body>
+    <ul>
+        {%if students!=None%}
+        {% for s_key,student in students.items() %}
+        {% set k = student.keys()|list%}
+        {% set v = student.values()|list%}
+        <h1>{{student.name}}</h1>
+        {%for i in range(k|length) %}
+            <li><strong>{{k[i]}}</strong> : {{v[i]}}</li>
+            {%endfor%}
+            <br>
+        {% endfor %}
+        {%else%}
+        <h3>{{"Data not found"}}</h3>
+        {%endif%}
+    </ul>
+
+    <a href="/">Back to Student List</a>
+</body>
+</html>
