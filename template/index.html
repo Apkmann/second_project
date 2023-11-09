@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Database Management System</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Database Management System</h1>
+
+        <h2>Student Records</h2>
+        <ul>
+            {%if students!=None%}
+            {% for s_key,student in students.items() %}
+                <li>{{ student.name }} - {{ student.email }}</li>
+            {% endfor %}
+            {%else%}
+            <h3>{{"Data not found"}}</h3>
+            {%endif%}
+        </ul>
+
+        <h2>Fill Details:1</h2>
+<form method="POST" action="/add_student">
+     <label>Email: <input type="text" name="email" required></label>
+    <label>12th Register Number: <input type="text" name="hsc_register_number"></label>
+    <label>Subjects Studied in HSC: <input type="text" name="subjects_studied"></label>
+    <label>College Register Number: <input type="text" name="college_register_number"></label>
+    <label>Name: <input type="text" name="name" required></label>
+    <label>Personal Email ID: <input type="text" name="personal_email"></label>
+    <label>Programme: <input type="text" name="programme"></label>
+    <label>Date of Birth: <input type="date" name="date_of_birth"></label>
+    <label>Gender: <select id="gender" name="gender">
+        <option value="select">Select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select></label>
+    <label>Aadhar Card Number: <input type="text" name="aadhar_card"></label>
+    <label>Nationality: <input type="text" name="nationality"></label>
+    <label>Religion: <input type="text" name="religion"></label>
+    <label>Community: <input type="text" name="community"></label>
+    <label>Caste: <input type="text" name="caste"></label>
+    <label>Blood Group: <input type="text" name="blood_group"></label>
+    <label>Languages Known: <input type="text" name="languages_known"></label>
+    <label>Any Allergic Problem: <input type="text" name="allergic_problem"></label>
+    <label>Mother Tongue: <input type="text" name="mother_tongue"></label>
+    <label>Father's Name with Initial: <input type="text" name="father_name"></label>
+    <label>Occupation of Father: <input type="text" name="father_occupation"></label>
+    <label>Department in which Father is Working: <input type="text" name="father_department"></label>
+    <label>Designation of Father: <input type="text" name="father_designation"></label>
+    <label>Specify the Designation and Organization in which Father is Working: <input type="text" name="father_organization"></label>
+    <label>Mother's Name: <input type="text" name="mother_name"></label>
+    <label>Mother's Mobile Number: <input type="text" name="mother_mobile"></label>
+    <label>Occupation of Mother: <input type="text" name="mother_occupation"></label>
+    <label>Department in which Mother is Working: <input type="text" name="mother_department"></label><br>
+    <label>Designation of Mother: <input type="text" name="mother_designation"></label><br>
+    <label>Specify the Designation and Organization in which Mother is Working: <input type="text" name="mother_organization_details"></label><br>
+    <label>Family Annual Income: <input type="text" name="family_income"></label><br>
+    <label>Local Guardian Name (If any): <input type="text" name="local_guardian_name"></label><br>
+    <label>Relationship of Local Guardian with Student: <input type="text" name="local_guardian_relationship"></label><br>
+    <label>Guardian Mobile Number: <input type="text" name="guardian_mobile"></label><br>
+    <label>Alternate Mobile Number: <input type="text" name="alternate_mobile"></label><br>
+    <label>Admitted in this College Under Government or Management Quota: 
+        <select name="admission_quota">
+            <option value="Government">Government</option>
+            <option value="Management">Management</option>
+        </select>
+    </label><br>
+    <label>First Graduate: 
+        <select name="first_graduate">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Availing NST Scholarship: 
+        <select name="nst_scholarship">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Availing Single Parent Scholarship: 
+        <select name="single_parent_scholarship">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Availing Sports Scholarship: 
+        <select name="sports_scholarship">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Availing +2 Merit Scholarship: 
+        <select name="merit_scholarship">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Availing 10th Merit Scholarship: 
+        <select name="merit_scholarship_10th">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Availing CM Scholarship for students who studied in Government School under 7.5% category: 
+        <select name="cm_scholarship">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Availing any other scholarship? If yes, specify the scheme name and amount. Otherwise, specify as NO: 
+        <input type="text" name="other_scholarship_details">
+    </label><br>
+    <label>Is Physically Challenged: 
+        <select name="physically_challenged">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Number of Siblings: <input type="number" name="number_of_siblings"></label><br>
+    <label>Present position of brother/sister: <input type="text" name="siblings_position"></label><br>
+    <label>Present Position of siblings, if working. Others specify as NA: <input type="text" name="siblings_working_position"></label><br>
+    <label>Door Number: <input type="text" name="door_number"></label><br>
+    <label>Street Name: <input type="text" name="street_name"></label><br>
+    <label>Village/Town: <input type="text" name="village_town"></label><br>
+    <label>District & Taluk: <input type="text" name="district_taluk"></label><br>
+    <label>Pincode: <input type="text" name="pincode"></label><br>
+    <label>State: <input type="text" name="state"></label><br>
+    <label>Is your communication address and permanent address the same? 
+        <select name="same_address">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>10th School Full Name: <input type="text" name="10th_school_name"></label><br>
+    <label>10th School Govt / Pvt ? 
+        <select name="10th_school_type">
+            <option value="Government">Government</option>
+            <option value="Private">Private</option>
+        </select>
+    </label><br>
+    <label>10th Board of Study: <input type="text" name="10th_board_of_study"></label><br>
+    <label>10th Medium of Study: <input type="text" name="10th_medium_of_study"></label><br>
+    <label>10th TOTAL MARK: <input type="text" name="10th_total_mark"></label><br>
+    <label>10th Studied School Address: <input type="text" name="10th_school_address"></label><br>
+    <label>10th Studied School District: <input type="text" name="10th_school_district"></label><br>
+    <label>10th Year of Pass: <input type="text" name="10th_year_of_pass"></label><br>
+    <label>Marks in 12th: <input type="text" name="12th_marks"></label><br>
+    <label>% in 12th (UP TO 2 DECIMALS Eg: 86.45): <input type="text" name="12th_percentage"></label><br>
+    <label>12th School Name: <input type="text" name="12th_school_name"></label><br>
+    <label>12th School Govt / Pvt ? 
+        <select name="12th_school_type">
+            <option value="Government">Government</option>
+            <option value="Private">Private</option>
+        </select>
+    </label><br>
+    <label>12th Board of Study: <input type="text" name="12th_board_of_study"></label><br>
+    <label>12th Medium of Study: <input type="text" name="12th_medium_of_study"></label><br>
+    <label>12th Studied School Address: <input type="text" name="12th_school_address"></label><br>
+    <label>12th Studied School District: <input type="text" name="12th_school_district"></label><br>
+    <label>12th Year of Pass: <input type="text" name="12th_year_of_pass"></label><br>
+    <label>12th MATHEMATICS MARK: <input type="text" name="12th_mathematics_mark"></label><br>
+    <label>12th PHYSICS MARK: <input type="text" name="12th_physics_mark"></label><br>
+    <label>12th CHEMISTRY MARK: <input type="text" name="12th_chemistry_mark"></label><br>
+    <label>12th TNEA Cut off Mark (OUT OF 100 - UP TO 2 DECIMALS EG: 66.45): <input type="text" name="12th_tnea_cut_off"></label><br>
+    <label>Is there any academic gap in your studies? 
+        <select name="academic_gap">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Any Achievements While Studying in School? <input type="text" name="achievements"></label><br>
+    <label>Hostel / Days Scholar: 
+        <select name="hostel_days_scholar">
+            <option value="Hostel">Hostel</option>
+            <option value="Days Scholar">Days Scholar</option>
+        </select>
+    </label><br>
+    <label>Hostel Room Number: <input type="text" name="hostel_room_number"></label><br>
+    <label>Mode of Travel: <input type="text" name="mode_of_travel"></label><br>
+    <label>Aspiration: <input type="text" name="aspiration"></label><br>
+    <label>Vaccination Completed: 
+        <select name="vaccination_completed">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Date of Vaccination Dose 1: <input type="date" name="vaccination_dose1_date"></label><br>
+    <label>Date of Vaccination Dose 2: <input type="date" name="vaccination_dose2_date"></label><br>
+    <label>Strength: <input type="text" name="strength"></label><br>
+    <label>Weakness: <input type="text" name="weakness"></label><br>
+    <label>Hobbies: <input type="text" name="hobbies"></label><br>
+    <label>Do you have a bank account? 
+        <select name="has_bank_account">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Bank Account Number: <input type="text" name="bank_account_number"></label><br>
+    <label>Account Holder's Name: <input type="text" name="account_holder_name"></label><br>
+    <label>Bank Name: <input type="text" name="bank_name"></label><br>
+    <label>Branch Name: <input type="text" name="branch_name"></label><br>
+    <label>IFSC Code: <input type="text" name="ifsc_code"></label><br>
+    <label>Do you have net banking? 
+        <select name="has_net_banking">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Do you have Smartphone? 
+        <select name="has_smartphone">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Do you have Laptop? 
+        <select name="has_laptop">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>WhatsApp Number: <input type="text" name="whatsapp_number"></label><br>
+    <label>Facebook ID: <input type="text" name="facebook_id"></label><br>
+    <label>Instagram ID: <input type="text" name="instagram_id"></label><br>
+    <label>LinkedIn ID: <input type="text" name="linkedin_id"></label><br>
+    <label>Twitter ID: <input type="text" name="twitter_id"></label><br>
+    <label>Passport Number: <input type="text" name="passport_number"></label><br>
+    <label>PAN Card Number: <input type="text" name="pan_card_number"></label><br>
+    <label>Driving License Number: <input type="text" name="driving_license_number"></label><br>
+    <label>Have you visited NEC before? 
+        <select name="visited_nec_before">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    
+    <label>Top Three Reasons for choosing Engineering: 
+        <input type="text" name="reasons_for_engineering_1">
+        <input type="text" name="reasons_for_engineering_2">
+        <input type="text" name="reasons_for_engineering_3">
+    </label><br>
+
+    <label>Top Three Reasons for choosing NEC: 
+        <input type="text" name="reasons_for_nec_1">
+        <input type="text" name="reasons_for_nec_2">
+        <input type="text" name="reasons_for_nec_3">
+    </label><br>
+
+    <label>Top Three Expectations from NEC: 
+        <input type="text" name="expectations_from_nec_1">
+        <input type="text" name="expectations_from_nec_2">
+        <input type="text" name="expectations_from_nec_3">
+    </label><br>
+
+    <label>Top Three Skills you want to gain in NEC: 
+        <input type="text" name="skills_to_gain_1">
+        <input type="text" name="skills_to_gain_2">
+        <input type="text" name="skills_to_gain_3">
+    </label><br>
+
+    <label>As a parent/student, if you needed information about NEC before the admission, which mode of Communication would you have preferred? 
+        <input type="text" name="preferred_communication_parent_student">
+    </label><br>
+
+    <label>As a student, if you needed information about NEC before the admission, which mode of Communication would you have preferred? 
+        <input type="text" name="preferred_communication_student">
+    </label><br>
+
+    <label>During your communication with NEC before the admission, which topics did you prefer to discuss the most? 
+        <input type="text" name="preferred_topics_of_discussion">
+    </label><br>
+
+    <label>How satisfied were you with the easiness of completing the enrollment process during admission? 
+        <input type="text" name="satisfaction_with_enrollment_easiness">
+    </label><br>
+
+    <label>How useful do you think were the information provided? 
+        <input type="text" name="usefulness_of_provided_information">
+    </label><br>
+    
+    <input type="submit" value="Submit">
+</form>
+
+<a href="{{url_for('student')}}">show data</a>
+
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <label for="pdf">Select a PDF file:</label>
+    <input type="file" id="pdf" name="pdf" accept=".pdf">
+    <button type="submit">Upload</button>
+</form>
+</div>
+</body>
+</html>
