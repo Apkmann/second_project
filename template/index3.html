@@ -4,24 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Details</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style2.css') }}">
 </head>
 <body>
-    <ul>
+    <div class="wrapper">
+        <form method = "POST" action="/search_student">
+            <input type="search" name="search">
+            <a href = "{{url_for('student')}}" class="clink"><img class = "cancel" src="{{ url_for('static', filename='cancel.png')}}"></a>
+            <button class="searchb" onclick="show()">Search</button>
+        </form>
+        <br>
+        <div class="table">
+          
+          <div class="row header">
+            <div class="cell">
+              Name
+            </div>
+            <div class="cell">
+              Email
+            </div>
+            <div class="cell">
+              Register No
+            </div>
+            <div class="cell">
+              Date of Birth
+            </div>
+          <div class="cell"> 
+            Gender
+          </div>
+          <div class="cell">
+            More
+          </div>
+          </div>
         {%if students!=None%}
         {% for s_key,student in students.items() %}
-        {% set k = student.keys()|list%}
-        {% set v = student.values()|list%}
-        <h1>{{student.name}}</h1>
-        {%for i in range(k|length) %}
-            <li><strong>{{k[i]}}</strong> : {{v[i]}}</li>
-            {%endfor%}
-            <br>
+          <div class="row">
+            {%if student.name!=""%}
+            <div class="cell" data-title="Name">
+                {{student.name}}
+            </div>
+            {%else%}
+            <div class="cell" data-title="Name">
+               None
+            </div>
+            {%endif%}
+            <div class="cell" data-title="Email">
+                {{student.email}}
+            </div>
+            <div class="cell" data-title="Register No">
+                {{student.college_register_number}}
+            </div>
+            <div class="cell" data-title="DOB">
+                {{student.date_of_birth}}
+            </div>
+            <div class="cell" data-title="Gender">
+                {{student.gender}}
+            </div>
+            <div class="cell" data-title="More">
+                <a class="more" href="#"><button class="details" type="submit">Detail</button></a>
+            </div>
+        </div>
         {% endfor %}
         {%else%}
-        <h3>{{"Data not found"}}</h3>
+        <h3 style="color:white">Data not found!</h3>
         {%endif%}
-    </ul>
+        </div>
 
     <a href="/">Back to Student List</a>
+    <script>
+        function show()
+        {
+            document.getElementsByClassName("cancel")[0].style.display = block;
+        }
+    </script>
 </body>
 </html>
