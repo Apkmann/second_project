@@ -15,11 +15,7 @@ bucket = storage.bucket()
 
 @app.route('/')
 def index():
-    try:
-        students = ref.get()
-        return render_template('index.html',students=students)
-    except:
-        return render_template('index.html',students=None)
+    return render_template('index.html',students=None)
 
 @app.route('/add_student', methods=['POST'])
 def add_student():
@@ -148,14 +144,21 @@ def add_student():
         "usefulness_of_provided_information": request.form.get("usefulness_of_provided_information")
     }
     ref.push(form_data)
-    second.push({"game":"Test"})
+    #second.push({"game":"Test"})
     return redirect("/")
 
 @app.route('/student')
 def student():
-    # Retrieve student details from Firebase based on the name
     students = ref.get()
     return render_template('index3.html', students=students)
+
+@app.route('/search_student', methods=['POST'])
+def search_student():
+    search = request.form.get("search")
+    student = ref.order_by_child("name").equal_to(search).get()
+    if student=={}:
+        return render_template("index3.html",students=None)
+    return render_template("index3.html",students=student)
     
 @app.route('/upload', methods=['POST'])
 def upload_file():
