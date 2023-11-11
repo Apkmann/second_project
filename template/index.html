@@ -8,18 +8,7 @@
     <div class="container">
         <h1>Student Database Management System</h1>
 
-        <h2>Student Records</h2>
-        <ul>
-            {%if students!=None%}
-            {% for s_key,student in students.items() %}
-                <li>{{ student.name }} - {{ student.email }}</li>
-            {% endfor %}
-            {%else%}
-            <h3>{{"Data not found"}}</h3>
-            {%endif%}
-        </ul>
-
-        <h2>Fill Details:1</h2>
+        <h2>Fill Details:</h2>
 <form method="POST" action="/add_student">
      <label>Email: <input type="text" name="email" required></label>
     <label>12th Register Number: <input type="text" name="hsc_register_number"></label>
